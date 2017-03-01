@@ -1,22 +1,35 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
+import {NavParams} from 'ionic-angular';
+import {FormGroup, FormControl, Validators} from "@angular/forms";
 
-/*
-  Generated class for the EditChallenge page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
-  selector: 'page-edit-challenge',
-  templateUrl: 'edit-challenge.html'
+    selector: 'page-edit-challenge',
+    templateUrl: 'edit-challenge.html'
 })
-export class EditChallengePage {
+export class EditChallengePage implements OnInit {
+    mode = 'New';
+    selectOptions = ['Easy', 'Medium', 'Hard']
+    chForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+    constructor(public navParams: NavParams) {
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EditChallengePage');
-  }
+    }
 
+    ngOnInit() {
+        this.mode = this.navParams.get('mode'); //assign value from previous page
+        this.initializeForm();
+    }
+
+    onSubmit() {
+        console.log(this.chForm);
+    }
+
+    private initializeForm() {
+        this.chForm = new FormGroup({
+            'title': new FormControl(null, Validators.required),
+            'description': new FormControl(null, Validators.required),
+            'difficulty': new FormControl('Medium', Validators.required)
+        });
+    }
 }
