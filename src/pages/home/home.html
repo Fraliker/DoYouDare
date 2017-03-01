@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar>
         <ion-buttons end>
-            <button ion-button icon-only (click)="onNewChallenge()">
+            <button ion-button icon-only (click)="onNewCh()">
                 <ion-icon name="add"></ion-icon>
             </button>
         </ion-buttons>
@@ -11,8 +11,11 @@
 
 <ion-content padding>
     <ion-list>
-  <button ion-item *ngFor="let challenge of chCollection">
-      challenge
+  <button ion-item
+          *ngFor="let challenge of challenges; let i = index"
+          (click)="onLoadCh(challenge, i)">
+      <h2>{{challenge.title}}</h2>
+      <ion-note>{{challenge.difficulty}}</ion-note>
   </button>
     </ion-list>
 </ion-content>

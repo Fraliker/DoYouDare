@@ -1,17 +1,21 @@
-export default [
-            {
-                id: '1',
-                title: 'Title1',
-                descr: 'Description1'
-            },
-            {
-                id: '2',
-                title: 'Title2',
-                descr: 'Description2'
-            },
-            {
-                id: '3',
-                title: 'Title3',
-                descr: 'Description3'
-            }
-]
+import {Challenge} from "../models/ch";
+export class ChService {
+    private challenges: Challenge[] = [];
+
+    addCh(title: string, description: string, difficulty: string) {
+        this.challenges.push(new Challenge(title, description, difficulty));
+        console.log(this.challenges);
+    }
+
+    getCh() {
+        return this.challenges.slice();
+    }
+
+    editCh(index: number, title: string, description: string, difficulty: string) {
+        this.challenges[index] = new Challenge(title, description, difficulty);
+    }
+
+    removeCh(index:number) {
+        this.challenges.splice(index, 1);
+    }
+}

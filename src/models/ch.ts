@@ -1,3 +1,10 @@
-/**
- * Created by Alex on 01-Mar-17.
- */
+export class Challenge {
+    constructor(
+        public title: string,
+        public description: string,
+        public difficulty: string
+    ) {
+
+    }
+
+}

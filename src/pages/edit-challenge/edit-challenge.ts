@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {NavParams} from 'ionic-angular';
+import {NavParams, NavController} from 'ionic-angular';
 import {FormGroup, FormControl, Validators} from "@angular/forms";
+import {ChService} from "../../services/challenges";
+import {HomePage} from "../home/home";
 
 
 @Component({
@@ -12,7 +14,9 @@ export class EditChallengePage implements OnInit {
     selectOptions = ['Easy', 'Medium', 'Hard']
     chForm: FormGroup;
 
-    constructor(public navParams: NavParams) {
+    constructor(public navParams: NavParams,
+                private chService: ChService,
+    private navCtrl: NavController) {
 
     }
 
@@ -22,7 +26,10 @@ export class EditChallengePage implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.chForm);
+        const value = this.chForm.value;
+        this.chService.addCh(value.title, value.description, value.difficulty)
+        this.chForm.reset();
+        this.navCtrl.popTo(HomePage);
     }
 
     private initializeForm() {

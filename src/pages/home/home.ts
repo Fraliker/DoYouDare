@@ -1,29 +1,34 @@
 import {Component, OnInit} from '@angular/core';
 
 import { NavController } from 'ionic-angular';
-import {Challenge} from "../../services/challenge.interface";
-import challenges from "../../services/challenges";
+import {Challenge} from "../../models/ch";
 import {EditChallengePage} from "../edit-challenge/edit-challenge";
+import {ChService} from "../../services/challenges";
+import {ChallengePage} from "../challenge/challenge";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage implements OnInit{
+export class HomePage{
   // list of challenges
-  chCollection: {}[];
+  challenges: Challenge[];
 
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public chService: ChService) {
 
   }
+  ionViewWillEnter() {
+    this.challenges = this.chService.getCh()
+}
 
-  ngOnInit() {
-    this.chCollection = challenges;
-  }
 
-  onNewChallenge() {
+
+  onNewCh() {
     this.navCtrl.push(EditChallengePage, {mode: 'New'});
+  }
+  onLoadCh(challenge: Challenge, index: number) {
+    this.navCtrl.push(ChallengePage, {challenge: challenge, index: index});
   }
 
 }
