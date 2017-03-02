@@ -1,24 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {TabsPage} from "../tabs/tabs";
+import {HomePage} from "../home/home";
 
-/*
-  Generated class for the Front page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-front',
   templateUrl: 'front.html'
 })
 export class FrontPage {
-  tabsPage = TabsPage;
+  homePage = HomePage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FrontPage');
-  }
 
 }

@@ -12,6 +12,7 @@ import {ChallengePage} from "../pages/challenge/challenge";
 import {UserPage} from "../pages/user/user";
 import {EditChallengePage} from "../pages/edit-challenge/edit-challenge";
 import {ChService} from "../services/challenges";
+import {AuthService} from "../services/auth";
 
 @NgModule({
     declarations: [
@@ -45,7 +46,7 @@ import {ChService} from "../services/challenges";
         EditChallengePage
 
     ],
-    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ChService]
+    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ChService, AuthService]
 })
 export class AppModule {
 }
