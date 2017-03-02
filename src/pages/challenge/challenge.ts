@@ -1,22 +1,32 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {Challenge} from "../../models/ch";
+import {EditChallengePage} from "../edit-challenge/edit-challenge";
+import {ChService} from "../../services/challenges";
+import {HomePage} from "../home/home";
 
-/*
-  Generated class for the Challenge page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-challenge',
   templateUrl: 'challenge.html'
 })
-export class ChallengePage {
+export class ChallengePage implements OnInit{
+challenge: Challenge;
+index: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private chService: ChService,) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ChallengePage');
+  ngOnInit() {
+  this.challenge = this.navParams.get('challenge');
+    this.index = this.navParams.get('index');
+  }
+
+  onEditCh() {
+    this.navCtrl.push(EditChallengePage, {mode: 'Edit', challenge: this.challenge, index: this.index})
+  }
+
+  onDeleteCh() {
+    this.chService.removeCh(this.index);
+    this.navCtrl.push(HomePage);
   }
 
 }
