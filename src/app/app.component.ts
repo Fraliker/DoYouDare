@@ -7,6 +7,7 @@ import {FrontPage} from "../pages/front/front";
 import {TabsPage} from "../pages/tabs/tabs";
 import {LoginPage} from "../pages/login/login";
 import {SignupPage} from "../pages/signup/signup";
+import {AuthService} from "../services/auth";
 
 
 @Component({
@@ -14,16 +15,27 @@ import {SignupPage} from "../pages/signup/signup";
 })
 export class MyApp {
 //  rootPage = FrontPage;
-  tabsPage = TabsPage;
+  rootPage: any = TabsPage;
   loginPage = LoginPage;
   signupPage = SignupPage;
+  isAuthenticated = false;
   @ViewChild('nav') nav: NavController;
 
-  constructor(platform: Platform, private menuCtrl: MenuController) {
+  constructor(platform: Platform, private menuCtrl: MenuController,
+  private authService: AuthService) {
     firebase.initializeApp({
       apiKey: "AIzaSyDqK9M31J_8xR0RU3yIN524zqpZtIboh7M",
       authDomain: "do-you-dare-bc9e4.firebaseapp.com"
     });
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.isAuthenticated = true;
+        this.rootPage = TabsPage;
+      } else {
+        this.isAuthenticated = false;
+        this.rootPage = SignupPage;
+      }
+    })
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -38,6 +50,8 @@ export class MyApp {
   }
 
   onLogout() {
-
+    this.authService.logout();
+    this.menuCtrl.close();
+    this.nav.setRoot(SignupPage);
   }
 }
