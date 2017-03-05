@@ -13,6 +13,7 @@ import {UserPage} from "../pages/user/user";
 import {EditChallengePage} from "../pages/edit-challenge/edit-challenge";
 import {ChService} from "../services/challenges";
 import {AuthService} from "../services/auth";
+import {HOPage} from "../pages/home/home-options/home-options";
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import {AuthService} from "../services/auth";
         ProfilePage,
         SignupPage,
         UserPage,
-        EditChallengePage
+        EditChallengePage,
+        HOPage
     ],
     imports: [
         IonicModule.forRoot(MyApp)
@@ -43,7 +45,8 @@ import {AuthService} from "../services/auth";
         ProfilePage,
         SignupPage,
         UserPage,
-        EditChallengePage
+        EditChallengePage,
+        HOPage
 
     ],
     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ChService, AuthService]

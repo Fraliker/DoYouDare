@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import {NavController, PopoverController} from 'ionic-angular';
 import {Challenge} from "../../models/ch";
 import {EditChallengePage} from "../edit-challenge/edit-challenge";
 import {ChService} from "../../services/challenges";
 import {ChallengePage} from "../challenge/challenge";
+import {HOPage} from "./home-options/home-options";
 
 @Component({
   selector: 'page-home',
@@ -15,7 +16,10 @@ export class HomePage{
   challenges: Challenge[];
 
 
-  constructor(public navCtrl: NavController, public chService: ChService) {
+  constructor(public navCtrl: NavController,
+              public chService: ChService,
+              private popoverCtrl: PopoverController
+  ) {
 
   }
   ionViewWillEnter() {
@@ -29,6 +33,10 @@ export class HomePage{
   }
   onLoadCh(challenge: Challenge, index: number) {
     this.navCtrl.push(ChallengePage, {challenge: challenge, index: index});
+  }
+  onShowOptions(event: MouseEvent){
+    const popover = this.popoverCtrl.create(HOPage);
+    popover.present({ev: event});
   }
 
 }
