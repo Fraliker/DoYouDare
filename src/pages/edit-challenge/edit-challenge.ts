@@ -4,6 +4,7 @@ import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {ChService} from "../../services/challenges";
 import {HomePage} from "../home/home";
 import {Challenge} from "../../models/ch";
+import {AuthService} from "../../services/auth";
 
 
 @Component({
@@ -16,10 +17,13 @@ export class EditChallengePage implements OnInit {
     chForm: FormGroup;
     challenge: Challenge;
     index: number;
+    userId: string;
+
 
     constructor(public navParams: NavParams,
                 private chService: ChService,
-    private navCtrl: NavController) {
+    private navCtrl: NavController,
+    private authService: AuthService) {
 
     }
 
@@ -29,15 +33,16 @@ export class EditChallengePage implements OnInit {
             this.challenge = this.navParams.get('challenge');
             this.index = this.navParams.get('index');
         }
+        this.userId = this.authService.getActiveUser().uid;
         this.initializeForm();
     }
 
     onSubmit() {
         const value = this.chForm.value;
         if (this.mode == 'Edit') {
-            this.chService.editCh(this.index, value.title, value.description, value.difficulty, value.img);
+            this.chService.editCh(this.index, value.title, value.description, value.difficulty, value.img, this.userId);
         } else {
-            this.chService.addCh(value.title, value.description, value.difficulty, value.img);
+            this.chService.addCh(value.title, value.description, value.difficulty, value.img, this.userId);
         }
 
         this.chForm.reset();

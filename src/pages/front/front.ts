@@ -14,6 +14,7 @@ export class FrontPage {
     challenges: Challenge[];
 
 
+
     constructor(public chService: ChService,
                 public navCtrl: NavController) {
     }

@@ -8,6 +8,7 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {LoginPage} from "../pages/login/login";
 import {SignupPage} from "../pages/signup/signup";
 import {AuthService} from "../services/auth";
+import {HomePage} from "../pages/home/home";
 
 
 @Component({
@@ -15,7 +16,7 @@ import {AuthService} from "../services/auth";
 })
 export class MyApp {
 //  rootPage = FrontPage;
-  rootPage: any = TabsPage;
+  rootPage: any = FrontPage;
   loginPage = LoginPage;
   signupPage = SignupPage;
   isAuthenticated = false;
@@ -30,10 +31,10 @@ export class MyApp {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.isAuthenticated = true;
-        this.rootPage = TabsPage;
+        this.rootPage = HomePage;
       } else {
         this.isAuthenticated = false;
-        this.rootPage = SignupPage;
+        this.rootPage = LoginPage;
       }
     })
     platform.ready().then(() => {

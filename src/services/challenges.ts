@@ -15,8 +15,8 @@ export class ChService {
 
     }
 
-    addCh(title: string, description: string, difficulty: string, img: string) {
-        this.challenges.push(new Challenge(title, description, difficulty, img));
+    addCh(title: string, description: string, difficulty: string, img: string, userId: string) {
+        this.challenges.push(new Challenge(title, description, difficulty, img, userId));
         console.log(this.challenges);
     }
 
@@ -26,8 +26,8 @@ export class ChService {
         return this.challenges.slice();
     }
 
-    editCh(index: number, title: string, description: string, difficulty: string, img: string) {
-        this.challenges[index] = new Challenge(title, description, difficulty, img);
+    editCh(index: number, title: string, description: string, difficulty: string, img: string, userId: string) {
+        this.challenges[index] = new Challenge(title, description, difficulty, img, userId);
     }
 
     removeCh(index:number) {
