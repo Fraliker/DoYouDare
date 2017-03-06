@@ -3,13 +3,15 @@ import {Injectable} from "@angular/core";
 import {Http, Response} from "@angular/http";
 import {AuthService} from "./auth";
 import 'rxjs/Rx'
+import {AlertController} from "ionic-angular";
 
 @Injectable()
 export class ChService {
     private challenges: Challenge[] = [];
 
     constructor(private http: Http,
-                private authService: AuthService) {
+                private authService: AuthService,
+                private alertCtrl: AlertController) {
 
     }
 
@@ -19,6 +21,8 @@ export class ChService {
     }
 
     getCh() {
+        //console.log("got challenges");
+        //console.log(this.challenges);
         return this.challenges.slice();
     }
 
@@ -48,7 +52,15 @@ export class ChService {
                 return response.json();
             })
             .do((data) => {
-                this.challenges = data
+                this.challenges = data;
         })
+    }
+    handleError(errorMessage: string) {
+        const alert = this.alertCtrl.create({
+            title: 'An error occurred!',
+            message: errorMessage,
+            buttons: ['Ok']
+        });
+        alert.present();
     }
 }
