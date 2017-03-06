@@ -39,7 +39,7 @@ export class HomePage{
   onShowOptions(event: MouseEvent){
     const loading = this.loadingCtrl.create({
       content: 'Please wait...'
-    })
+    });
     const popover = this.popoverCtrl.create(HOPage);
     popover.present({ev: event});
     popover.onDidDismiss(

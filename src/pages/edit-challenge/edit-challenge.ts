@@ -12,7 +12,7 @@ import {Challenge} from "../../models/ch";
 })
 export class EditChallengePage implements OnInit {
     mode = 'New';
-    selectOptions = ['Easy', 'Medium', 'Hard']
+    selectOptions = ['Easy', 'Medium', 'Hard'];
     chForm: FormGroup;
     challenge: Challenge;
     index: number;
@@ -35,9 +35,9 @@ export class EditChallengePage implements OnInit {
     onSubmit() {
         const value = this.chForm.value;
         if (this.mode == 'Edit') {
-            this.chService.editCh(this.index, value.title, value.description, value.difficulty);
+            this.chService.editCh(this.index, value.title, value.description, value.difficulty, value.img);
         } else {
-            this.chService.addCh(value.title, value.description, value.difficulty);
+            this.chService.addCh(value.title, value.description, value.difficulty, value.img);
         }
 
         this.chForm.reset();
@@ -48,16 +48,19 @@ export class EditChallengePage implements OnInit {
         let title = null;
         let description = null;
         let difficulty = 'Medium';
+        let img = null;
 
         if (this.mode == 'Edit') {
             title = this.challenge.title;
             description = this.challenge.description;
             difficulty = this.challenge.difficulty;
+            img = this.challenge.img;
         }
         this.chForm = new FormGroup({
             'title': new FormControl(title, Validators.required),
             'description': new FormControl(description, Validators.required),
-            'difficulty': new FormControl(difficulty, Validators.required)
+            'difficulty': new FormControl(difficulty, Validators.required),
+            'img': new FormControl(img, Validators.required)
         });
     }
 }

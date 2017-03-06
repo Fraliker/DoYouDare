@@ -13,8 +13,8 @@ export class ChService {
 
     }
 
-    addCh(title: string, description: string, difficulty: string) {
-        this.challenges.push(new Challenge(title, description, difficulty));
+    addCh(title: string, description: string, difficulty: string, img: string) {
+        this.challenges.push(new Challenge(title, description, difficulty, img));
         console.log(this.challenges);
     }
 
@@ -22,8 +22,8 @@ export class ChService {
         return this.challenges.slice();
     }
 
-    editCh(index: number, title: string, description: string, difficulty: string) {
-        this.challenges[index] = new Challenge(title, description, difficulty);
+    editCh(index: number, title: string, description: string, difficulty: string, img: string) {
+        this.challenges[index] = new Challenge(title, description, difficulty, img);
     }
 
     removeCh(index:number) {
@@ -31,19 +31,19 @@ export class ChService {
     }
 
     storeList(token: string) {
-        const userId = this.authService.getActiveUser().uid;
-        console.log('https://do-you-dare-bc9e4.firebaseio.com/' + userId + '/challenges.json?auth=' + token);
+       // const userId = this.authService.getActiveUser().uid;
+        console.log('https://do-you-dare-bc9e4.firebaseio.com/challenges.json?auth=' + token);
         return this.http
-            .put('https://do-you-dare-bc9e4.firebaseio.com/' + userId + '/challenges.json?auth=' + token, this.challenges)
+            .put('https://do-you-dare-bc9e4.firebaseio.com/challenges.json?auth=' + token, this.challenges)
             .map((response: Response) => {
                 return response.json();
             });
     }
 
     fetchList() {
-        const userId = this.authService.getActiveUser().uid;
+        //const userId = this.authService.getActiveUser().uid;
         return this.http
-            .get('https://do-you-dare-bc9e4.firebaseio.com/' + userId + '/challenges.json')
+            .get('https://do-you-dare-bc9e4.firebaseio.com/challenges.json')
             .map((response: Response) => {
                 return response.json();
             })
