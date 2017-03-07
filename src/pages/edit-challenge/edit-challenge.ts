@@ -47,12 +47,12 @@ export class EditChallengePage implements OnInit {
                 .then(
                     (token: string) => {
                         this.chService.addCh(token, value.title, value.description, value.difficulty, value.img, this.userId)
-                            .subscribe(
-                                () => console.log("Challenge added to FireBase"),
-                                error => {
-                                    this.chService.handleError(error.json().error);
-                                }
-                            )
+                            // .subscribe(
+                            //     () => console.log("Challenge added to FireBase"),
+                            //     error => {
+                            //         this.chService.handleError(error.json().error);
+                            //     }
+                            // )
                     }
                 )
         }

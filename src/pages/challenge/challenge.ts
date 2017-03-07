@@ -34,8 +34,8 @@ export class ChallengePage implements OnInit {
     }
 
     onDeleteCh() {
-        this.chService.removeCh(this.index)
-        this.navCtrl.push(HomePage)
+        // this.chService.removeCh(this.index)
+        // this.navCtrl.push(HomePage)
     }
 
 

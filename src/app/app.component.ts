@@ -1,7 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {Platform, NavController, MenuController} from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-import firebase from 'firebase';
 
 import {FrontPage} from "../pages/front/front";
 import {TabsPage} from "../pages/tabs/tabs";
@@ -10,6 +9,7 @@ import {SignupPage} from "../pages/signup/signup";
 import {AuthService} from "../services/auth";
 import {HomePage} from "../pages/home/home";
 
+import firebase from 'firebase/app';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,10 +24,7 @@ export class MyApp {
 
   constructor(platform: Platform, private menuCtrl: MenuController,
   private authService: AuthService) {
-    firebase.initializeApp({
-      apiKey: "AIzaSyDqK9M31J_8xR0RU3yIN524zqpZtIboh7M",
-      authDomain: "do-you-dare-bc9e4.firebaseapp.com"
-    });
+    
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.isAuthenticated = true;

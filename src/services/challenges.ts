@@ -4,29 +4,35 @@ import {Http, Response} from "@angular/http";
 import {AuthService} from "./auth";
 import 'rxjs/Rx'
 import {AlertController} from "ionic-angular";
+import {FirebaseListObservable, AngularFire} from "angularfire2"
+import auth = firebase.auth
 
 @Injectable()
 export class ChService {
-    private challenges: Challenge[] = [];
+    // private challenges: Challenge[] = [];
+    challenges: FirebaseListObservable<Challenge[]>
 
     constructor(private http: Http,
                 private authService: AuthService,
-                private alertCtrl: AlertController) {
+                private alertCtrl: AlertController,
+                private af: AngularFire) {
+        this.challenges = af.database.list('/challenges');
 
     }
 
-    addCh(token: string, title: string, description: string, difficulty: string, img: string, userId: string) {
-        // this.challenges.push(new Challenge(title, description, difficulty, img, userId));
-        // console.log(this.challenges);
-        return this.http
-            .post('https://do-you-dare-bc9e4.firebaseio.com/challenges.json?auth=' + token, new Challenge(title, description, difficulty, img, userId))
-
+    // addCh(token: string, title: string, description: string, difficulty: string, img: string, userId: string) {
+    //     return this.http
+    //         .post('https://do-you-dare-bc9e4.firebaseio.com/challenges.json?auth=' + token, new Challenge(title, description, difficulty, img, userId))
+    //
+    // }
+    addCh (token: string, title: string, description: string, difficulty: string, img: string, userId: string) {
+        this.challenges.push({title, description, difficulty, img, userId})
     }
 
     getCh() {
         //console.log("got challenges");
         //console.log(this.challenges);
-        return this.challenges.slice();
+        return this.challenges;
     }
 
     editCh(index: number, title: string, description: string, difficulty: string, img: string, userId: string) {
@@ -34,7 +40,7 @@ export class ChService {
     }
 
     removeCh(index:number) {
-        this.challenges.splice(index, 1);
+        // this.challenges.splice(index, 1);
     }
 
     storeList(token: string) {

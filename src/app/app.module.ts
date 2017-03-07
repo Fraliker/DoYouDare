@@ -16,13 +16,14 @@ import {AuthService} from "../services/auth";
 import {HOPage} from "../pages/home/home-options/home-options";
 import {AngularFireModule} from "angularfire2"
 
+
 export const firebaseConfig = {
     apiKey: "AIzaSyDqK9M31J_8xR0RU3yIN524zqpZtIboh7M",
     authDomain: "do-you-dare-bc9e4.firebaseapp.com",
     databaseURL: "https://do-you-dare-bc9e4.firebaseio.com",
     storageBucket: "do-you-dare-bc9e4.appspot.com",
     messagingSenderId: "456374355832"
-}
+};
 
 @NgModule({
     declarations: [

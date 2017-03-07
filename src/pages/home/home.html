@@ -5,11 +5,11 @@
                 <ion-icon name="menu"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-buttons end>
-            <button ion-button icon-only (click)="onShowOptions($event)">
-                <ion-icon name="more"></ion-icon>
-            </button>
-        </ion-buttons>
+        <!--<ion-buttons end>-->
+            <!--<button ion-button icon-only (click)="onShowOptions($event)">-->
+                <!--<ion-icon name="more"></ion-icon>-->
+            <!--</button>-->
+        <!--</ion-buttons>-->
         <ion-buttons end>
             <button ion-button icon-only (click)="onNewCh()">
                 <ion-icon name="add"></ion-icon>
@@ -22,7 +22,7 @@
 <ion-content padding>
     <ion-list>
         <button ion-item
-                *ngFor="let challenge of challenges; let i = index"
+                *ngFor="let challenge of challenges | async; let i = index"
                 (click)="onLoadCh(challenge, i)">
             <h2>{{challenge.title}}</h2>
             <ion-note>{{challenge.difficulty}}</ion-note>

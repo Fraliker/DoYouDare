@@ -20,22 +20,23 @@ export class FrontPage {
     }
 
     ionViewDidEnter() {
-        this.chService.fetchList()
-            .subscribe(
-                (list: Challenge[]) => {
-                    if (list) {
-                        this.challenges = list;
-                        console.log("Challenges from fetch subscribe at FrontPage");
-                        this.chService.getCh();
-                        this.navCtrl.push(HomePage);
-                    } else {
-                        this.challenges = []
-                    }
-                },
-                error => {
-                    this.chService.handleError(error.json().error);
-                }
-            )
+        this.navCtrl.push(HomePage);
+        //     this.chService.fetchList()
+        //         .subscribe(
+        //             (list: Challenge[]) => {
+        //                 if (list) {
+        //                     this.challenges = list;
+        //                     console.log("Challenges from fetch subscribe at FrontPage");
+        //                     this.chService.getCh();
+        //
+        //                 } else {
+        //                     this.challenges = []
+        //                 }
+        //             },
+        //             error => {
+        //                 this.chService.handleError(error.json().error);
+        //             }
+        //         )
+        // }
     }
-
 }
