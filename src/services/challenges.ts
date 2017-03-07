@@ -15,9 +15,12 @@ export class ChService {
 
     }
 
-    addCh(title: string, description: string, difficulty: string, img: string, userId: string) {
-        this.challenges.push(new Challenge(title, description, difficulty, img, userId));
-        console.log(this.challenges);
+    addCh(token: string, title: string, description: string, difficulty: string, img: string, userId: string) {
+        // this.challenges.push(new Challenge(title, description, difficulty, img, userId));
+        // console.log(this.challenges);
+        return this.http
+            .post('https://do-you-dare-bc9e4.firebaseio.com/challenges.json?auth=' + token, new Challenge(title, description, difficulty, img, userId))
+
     }
 
     getCh() {
@@ -52,7 +55,8 @@ export class ChService {
                 return response.json();
             })
             .do((data) => {
-                this.challenges = data;
+                this.challenges = data
+                console.log(this.challenges)
         })
     }
     handleError(errorMessage: string) {

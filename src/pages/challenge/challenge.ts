@@ -1,19 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import {Challenge} from "../../models/ch";
-import {EditChallengePage} from "../edit-challenge/edit-challenge";
-import {ChService} from "../../services/challenges";
-import {HomePage} from "../home/home";
-import {AuthService} from "../../services/auth";
+import {Component, OnInit} from '@angular/core'
+import {NavController, NavParams} from 'ionic-angular'
+import {Challenge} from "../../models/ch"
+import {EditChallengePage} from "../edit-challenge/edit-challenge"
+import {ChService} from "../../services/challenges"
+import {HomePage} from "../home/home"
+import {AuthService} from "../../services/auth"
 
 @Component({
     selector: 'page-challenge',
     templateUrl: 'challenge.html'
 })
 export class ChallengePage implements OnInit {
-    challenge: Challenge;
-    index: number;
-    sameUser: boolean;
+    challenge: Challenge
+    index: number
+    sameUser: boolean
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
@@ -23,9 +23,10 @@ export class ChallengePage implements OnInit {
 
 
     ngOnInit() {
-        this.challenge = this.navParams.get('challenge');
-        this.index = this.navParams.get('index');
-        this.sameUser = this.authService.compareUsers(this.challenge);
+        this.challenge = this.navParams.get('challenge')
+        this.index = this.navParams.get('index')
+        this.sameUser = this.authService.compareUsers(this.challenge.userId)
+        console.log(this.sameUser)
     }
 
     onEditCh() {
@@ -33,8 +34,8 @@ export class ChallengePage implements OnInit {
     }
 
     onDeleteCh() {
-        this.chService.removeCh(this.index);
-        this.navCtrl.push(HomePage);
+        this.chService.removeCh(this.index)
+        this.navCtrl.push(HomePage)
     }
 
 

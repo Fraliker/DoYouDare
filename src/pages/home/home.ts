@@ -28,20 +28,20 @@ export class HomePage {
         this.challenges = this.chService.getCh();
         console.log(this.challenges);
 
-        // this.chService.fetchList()
-        //     .subscribe(
-        //         (list: Challenge[]) => {
-        //             if (list) {
-        //                 this.challenges = list;
-        //                 console.log(this.challenges);
-        //             } else {
-        //                 this.challenges = []
-        //             }
-        //         },
-        //         error => {
-        //             this.chService.handleError(error.json().error);
-        //         }
-        //     )
+        this.chService.fetchList()
+            .subscribe(
+                (list: Challenge[]) => {
+                    if (list) {
+                        this.challenges = list;
+                        console.log(this.challenges);
+                    } else {
+                        this.challenges = []
+                    }
+                },
+                error => {
+                    this.chService.handleError(error.json().error);
+                }
+            )
 
     }
 
@@ -103,7 +103,6 @@ export class HomePage {
                                     )
                             }
                         )
-                        .catch()
                 }
             }
         )

@@ -16,7 +16,8 @@ export class AuthService {
     getActiveUser() {
         return firebase.auth().currentUser;
     }
-    compareUsers(challenge: Challenge) {
-        return (this.getActiveUser().uid == challenge.userId);
+    compareUsers(userId: string) {
+        console.log("compare users")
+        return (this.getActiveUser().uid == userId);
     }
 }

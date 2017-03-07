@@ -42,7 +42,19 @@ export class EditChallengePage implements OnInit {
         if (this.mode == 'Edit') {
             this.chService.editCh(this.index, value.title, value.description, value.difficulty, value.img, this.userId);
         } else {
-            this.chService.addCh(value.title, value.description, value.difficulty, value.img, this.userId);
+
+            this.authService.getActiveUser().getToken()
+                .then(
+                    (token: string) => {
+                        this.chService.addCh(token, value.title, value.description, value.difficulty, value.img, this.userId)
+                            .subscribe(
+                                () => console.log("Challenge added to FireBase"),
+                                error => {
+                                    this.chService.handleError(error.json().error);
+                                }
+                            )
+                    }
+                )
         }
 
         this.chForm.reset();
