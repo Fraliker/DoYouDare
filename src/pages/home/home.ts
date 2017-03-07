@@ -36,7 +36,7 @@ export class HomePage {
     }
 
     onLoadCh(challenge: Challenge, index: number) {
-        this.navCtrl.push(ChallengePage, {challenge: challenge, index: index});
+        this.navCtrl.push(ChallengePage, {challenge: challenge});
     }
 
     // onShowOptions(event: MouseEvent) {

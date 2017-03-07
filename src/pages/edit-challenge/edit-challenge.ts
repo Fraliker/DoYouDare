@@ -31,7 +31,6 @@ export class EditChallengePage implements OnInit {
         this.mode = this.navParams.get('mode'); //assign value from previous page
         if (this.mode == 'Edit') {
             this.challenge = this.navParams.get('challenge');
-            this.index = this.navParams.get('index');
         }
         this.userId = this.authService.getActiveUser().uid;
         this.initializeForm();
@@ -40,7 +39,7 @@ export class EditChallengePage implements OnInit {
     onSubmit() {
         const value = this.chForm.value;
         if (this.mode == 'Edit') {
-            this.chService.editCh(this.index, value.title, value.description, value.difficulty, value.img, this.userId);
+            this.chService.editCh(this.challenge.$key, this.index, value.title, value.description, value.difficulty, value.img, this.userId);
         } else {
 
             this.authService.getActiveUser().getToken()

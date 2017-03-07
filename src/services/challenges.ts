@@ -35,8 +35,9 @@ export class ChService {
         return this.challenges;
     }
 
-    editCh(index: number, title: string, description: string, difficulty: string, img: string, userId: string) {
-        this.challenges[index] = new Challenge(title, description, difficulty, img, userId);
+    editCh($key: string, index: number, title: string, description: string, difficulty: string, img: string, userId: string) {
+        this.challenges[index] = new Challenge($key, title, description, difficulty, img, userId);
+        console.log($key)
     }
 
     removeCh(index:number) {

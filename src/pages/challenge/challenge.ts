@@ -23,19 +23,21 @@ export class ChallengePage implements OnInit {
 
 
     ngOnInit() {
+        console.log(this.challenge)
         this.challenge = this.navParams.get('challenge')
-        this.index = this.navParams.get('index')
+        console.log(this.challenge)
+        //this.index = this.navParams.get('index')
         this.sameUser = this.authService.compareUsers(this.challenge.userId)
         console.log(this.sameUser)
     }
 
     onEditCh() {
-        this.navCtrl.push(EditChallengePage, {mode: 'Edit', challenge: this.challenge, index: this.index})
+        this.navCtrl.push(EditChallengePage, {mode: 'Edit', challenge: this.challenge})
     }
 
     onDeleteCh() {
-        // this.chService.removeCh(this.index)
-        // this.navCtrl.push(HomePage)
+        this.chService.removeCh(this.index)
+        this.navCtrl.push(HomePage)
     }
 
 
