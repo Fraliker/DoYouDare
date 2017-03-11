@@ -25,8 +25,9 @@ export class ChService {
 	//         .post('https://do-you-dare-bc9e4.firebaseio.com/challenges.json?auth=' + token, new Challenge(title, description, difficulty, img, userId))
 	//
 	// }
-	addCh(title: string, description: string, difficulty: string, img: string, userId: string) {
-		this.challenges.push({title, description, difficulty, img, userId})
+	addCh(title: string, description: string, difficulty: string, userId: string) {
+		return this.challenges.push({title, description, difficulty, userId})
+		
 	}
 	
 	getCh() {

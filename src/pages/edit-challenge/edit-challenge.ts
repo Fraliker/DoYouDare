@@ -20,8 +20,8 @@ export class EditChallengePage implements OnInit {
 	challenge: Challenge
 	userId: string
 	img: any
+	imgData: any
 	public imgRef: any
-	test: any
 	
 	
 	constructor(public navParams: NavParams,
@@ -34,11 +34,10 @@ export class EditChallengePage implements OnInit {
 	ngOnInit() {
 		this.mode = this.navParams.get('mode'); //assign value from previous page
 		this.userId = this.authService.getActiveUser().uid
-		this.img = ''
 		this.imgRef = firebase.storage().ref()
 		if (this.mode == 'Edit') {
 			this.challenge = this.navParams.get('challenge')
-			console.log(this.challenge.$key+'.png')
+			this.img = this.challenge.img
 		}
 
 		this.initializeForm()
@@ -49,9 +48,17 @@ export class EditChallengePage implements OnInit {
 		if (this.mode == 'Edit') {
 			this.chService.editCh(this.challenge.$key, value.title, value.description, value.difficulty, this.challenge.img, this.challenge.userId)
 		} else {
-			this.chService.addCh(value.title, value.description, value.difficulty, value.img, this.userId)
+			this.chService.addCh(value.title, value.description, value.difficulty, this.userId)
+				.then(
+					newObject => {
+						this.uploadImg(this.imgData, newObject.key)
+							.then((savedPicture) => {
+								this.img = savedPicture.downloadURL
+								this.chService.editCh(newObject.key, value.title, value.description, value.difficulty, this.img, this.userId)
+							})
+					}
+				)
 		}
-		
 		this.chForm.reset()
 		this.navCtrl.push(HomePage)
 	}
@@ -60,19 +67,16 @@ export class EditChallengePage implements OnInit {
 		let title       = null
 		let description = null
 		let difficulty  = 'Medium'
-		let img         = ''
 		
 		if (this.mode == 'Edit') {
 			title       = this.challenge.title
 			description = this.challenge.description
 			difficulty  = this.challenge.difficulty
-			img         = this.challenge.img
 		}
 		this.chForm = new FormGroup({
 			'title': new FormControl(title, Validators.required),
 			'description': new FormControl(description, Validators.required),
 			'difficulty': new FormControl(difficulty, Validators.required),
-			'img': new FormControl(img, Validators.required)
 		});
 	}
 	
@@ -89,7 +93,7 @@ export class EditChallengePage implements OnInit {
 		})
 			.then(
 				imageData => {
-					this.uploadImg(imageData)
+					this.imgData = imageData
 				}
 			)
 			.catch(
@@ -99,11 +103,8 @@ export class EditChallengePage implements OnInit {
 			)
 	}
 	
-	uploadImg(img) {
-		this.imgRef.child(this.challenge.$key+'.png')
+	uploadImg(img, key) {
+		return this.imgRef.child(key+'.png')
 			.putString(img, 'base64', {contentType: 'image/png'})
-			.then((savedPicture) => {
-				this.challenge.img = savedPicture.downloadURL
-			})
 	}
 }

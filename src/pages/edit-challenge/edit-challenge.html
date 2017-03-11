@@ -30,13 +30,6 @@
                     </ion-option>
                 </ion-select>
             </ion-item>
-            <ion-item>
-                <ion-label floating>Image Source</ion-label>
-                <ion-input
-                        type="text"
-                        formControlName="img"></ion-input>
-            </ion-item>
-
             <button
                     ion-button
                     icon-left
@@ -47,11 +40,11 @@
                 <ion-icon name="camera"></ion-icon>
                 Open Cam
             </button>
-
-            <ion-item *ngIf="this.challenge.img != null">
-                <img [src]="this.challenge.img">
-            </ion-item>
         </ion-list>
-        <button type="submit" ion-button block [disabled]="!chForm.valid || this.challenge.img == null">{{mode}} Challenge</button>
+        <!--<button type="submit" ion-button block [disabled]="!chForm.valid || this.img == null">{{mode}} Challenge</button>-->
+        <button type="submit" ion-button block [disabled]="!chForm.valid">{{mode}} Challenge</button>
+        <ion-item *ngIf="this.img != ''">
+            <img [src]="this.img">
+        </ion-item>
     </form>
 </ion-content>
