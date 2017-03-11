@@ -21,7 +21,7 @@ export class EditChallengePage implements OnInit {
 	userId: string
 	img: any
 	public imgRef: any
-	public rootRef: any
+	test: any
 	
 	
 	constructor(public navParams: NavParams,
@@ -35,11 +35,9 @@ export class EditChallengePage implements OnInit {
 		this.mode = this.navParams.get('mode'); //assign value from previous page
 		this.userId = this.authService.getActiveUser().uid
 		this.img = ''
-		this.rootRef = firebase.storage().ref()
+		this.imgRef = firebase.storage().ref()
 		if (this.mode == 'Edit') {
 			this.challenge = this.navParams.get('challenge')
-			// this.img = this.challenge.img
-			this.imgRef = this.rootRef.child(this.challenge.$key+'.png')
 			console.log(this.challenge.$key+'.png')
 		}
 
@@ -49,21 +47,9 @@ export class EditChallengePage implements OnInit {
 	onSubmit() {
 		const value = this.chForm.value
 		if (this.mode == 'Edit') {
-			this.chService.editCh(this.challenge.$key, value.title, value.description, value.difficulty, value.img, this.challenge.userId)
+			this.chService.editCh(this.challenge.$key, value.title, value.description, value.difficulty, this.challenge.img, this.challenge.userId)
 		} else {
 			this.chService.addCh(value.title, value.description, value.difficulty, value.img, this.userId)
-			// this.authService.getActiveUser().getToken()
-			//     .then(
-			//         (token: string) => {
-			//             this.chService.addCh(token, value.title, value.description, value.difficulty, value.img, this.userId)
-			//                 // .subscribe(
-			//                 //     () => console.log("Challenge added to FireBase"),
-			//                 //     error => {
-			//                 //         this.chService.handleError(error.json().error);
-			//                 //     }
-			//                 // )
-			//         }
-			//     )
 		}
 		
 		this.chForm.reset()
@@ -103,10 +89,7 @@ export class EditChallengePage implements OnInit {
 		})
 			.then(
 				imageData => {
-					this.img = imageData
-					console.log(this.img)
 					this.uploadImg(imageData)
-					//this.uploadImage(this.challenge.title, imageData)
 				}
 			)
 			.catch(
@@ -117,39 +100,10 @@ export class EditChallengePage implements OnInit {
 	}
 	
 	uploadImg(img) {
-		// var message = 'This is my message.';
-		// this.imgRef //maybe add return .child(this.challenge.$key)
-		// 	.putString(message)
-		// 	.then((savedPicture) => {
-		// 		this.img = savedPicture.downloadURL
-		// 		console.log(this.img)
-		// 	});
-		
-		this.imgRef //maybe add return .child(this.challenge.$key)
+		this.imgRef.child(this.challenge.$key+'.png')
 			.putString(img, 'base64', {contentType: 'image/png'})
 			.then((savedPicture) => {
-				this.img
-					.set(savedPicture.downloadURL);
-				console.log(this.img)
-			});
+				this.challenge.img = savedPicture.downloadURL
+			})
 	}
-	
-	
-	
-	uploadImage(name, data) {
-		let promise = new Promise((res,rej) => {
-			let fileName = name + ".jpg";
-			let uploadTask = firebase.storage().ref(`/posts/${fileName}`).put(data);
-			uploadTask.on('state_changed', function(snapshot) {
-			}, function(error) {
-				rej(error);
-			}, function() {
-				var downloadURL = uploadTask.snapshot.downloadURL;
-				res(downloadURL);
-			});
-		});
-		return promise;
-	}
-	
-	
 }

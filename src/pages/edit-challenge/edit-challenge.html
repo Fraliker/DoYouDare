@@ -48,10 +48,10 @@
                 Open Cam
             </button>
 
-            <ion-item *ngIf="img != ''">
-                <img [src]="img">
+            <ion-item *ngIf="this.challenge.img != null">
+                <img [src]="this.challenge.img">
             </ion-item>
         </ion-list>
-        <button type="submit" ion-button block [disabled]="!chForm.valid || img == ''">{{mode}} Challenge</button>
+        <button type="submit" ion-button block [disabled]="!chForm.valid || this.challenge.img == null">{{mode}} Challenge</button>
     </form>
 </ion-content>
