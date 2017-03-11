@@ -38,13 +38,23 @@
                     type="button"
                     (click)="onTakePhoto()">
                 <ion-icon name="camera"></ion-icon>
-                Open Cam
+                Open Camera
+            </button>
+            <button
+                    ion-button
+                    icon-left
+                    block
+                    outline
+                    type="button"
+                    (click)="onChoosePhoto()">
+                <ion-icon name="images"></ion-icon>
+                Choose Image
             </button>
         </ion-list>
         <!--<button type="submit" ion-button block [disabled]="!chForm.valid || this.img == null">{{mode}} Challenge</button>-->
-        <button type="submit" ion-button block [disabled]="!chForm.valid">{{mode}} Challenge</button>
-        <ion-item *ngIf="this.img != ''">
-            <img [src]="this.img">
+        <button type="submit" ion-button block [disabled]="!chForm.valid || this.img == ''">{{mode}} Challenge</button>
+        <ion-item *ngIf="img">
+            <img [src]="img">
         </ion-item>
     </form>
 </ion-content>

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core'
 import {NavParams, NavController} from 'ionic-angular'
 import {FormGroup, FormControl, Validators} from "@angular/forms"
 import {ChService} from "../../services/challenges"
-import {HomePage} from "../home/home"
 import {Challenge} from "../../models/ch"
 import {AuthService} from "../../services/auth"
 import {Camera} from "ionic-native"
@@ -35,6 +34,7 @@ export class EditChallengePage implements OnInit {
 		this.mode = this.navParams.get('mode'); //assign value from previous page
 		this.userId = this.authService.getActiveUser().uid
 		this.imgRef = firebase.storage().ref()
+		this.img = ''
 		if (this.mode == 'Edit') {
 			this.challenge = this.navParams.get('challenge')
 			this.img = this.challenge.img
@@ -60,7 +60,7 @@ export class EditChallengePage implements OnInit {
 				)
 		}
 		this.chForm.reset()
-		this.navCtrl.push(HomePage)
+		this.navCtrl.popToRoot()
 	}
 	
 	private initializeForm() {
@@ -82,18 +82,56 @@ export class EditChallengePage implements OnInit {
 	
 	onTakePhoto() {
 		Camera.getPicture({
-			quality : 95,
+			quality : 90,
 			destinationType : Camera.DestinationType.DATA_URL,
 			sourceType : Camera.PictureSourceType.CAMERA,
 			allowEdit : true,
 			encodingType: Camera.EncodingType.PNG,
-			targetWidth: 500,
-			targetHeight: 500,
-			saveToPhotoAlbum: true
+			targetWidth: 300,
+			targetHeight: 200,
+			saveToPhotoAlbum: true,
 		})
 			.then(
 				imageData => {
 					this.imgData = imageData
+					
+					if (this.mode == 'Edit') {
+						this.uploadImg(this.imgData, this.challenge.$key)
+							.then((savedPicture) => {
+								this.challenge.img = savedPicture.downloadURL
+								this.img = savedPicture.downloadURL //to show it as preview
+							})
+					} else { this.img = "data:image/jpeg;base64," + imageData; }
+				}
+			)
+			.catch(
+				err => {
+					console.log(err)
+				}
+			)
+	}
+	onChoosePhoto() {
+		Camera.getPicture({
+			quality : 90,
+			destinationType : Camera.DestinationType.DATA_URL,
+			sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+			allowEdit : true,
+			encodingType: Camera.EncodingType.PNG,
+			targetWidth: 300,
+			targetHeight: 200,
+			saveToPhotoAlbum: true,
+		})
+			.then(
+				imageData => {
+					this.imgData = imageData
+					
+					if (this.mode == 'Edit') {
+						this.uploadImg(this.imgData, this.challenge.$key)
+							.then((savedPicture) => {
+								this.challenge.img = savedPicture.downloadURL
+								this.img = savedPicture.downloadURL //to show it as preview
+							})
+					} else { this.img = "data:image/jpeg;base64," + imageData; }
 				}
 			)
 			.catch(
