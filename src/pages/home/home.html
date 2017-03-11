@@ -1,7 +1,7 @@
-<ion-header>
-    <ion-navbar color=”primary”>
+<ion-header >
+    <ion-navbar >
         <ion-buttons left>
-            <button ion-button icon-only menuToggle>
+            <button ion-button icon-only menuToggle color="light">
                 <ion-icon name="menu"></ion-icon>
             </button>
         </ion-buttons>
@@ -11,24 +11,31 @@
             <!--</button>-->
         <!--</ion-buttons>-->
         <ion-buttons end>
-            <button ion-button icon-only (click)="onNewCh()">
+            <button ion-button icon-only color="light" (click)="onNewCh()">
                 <ion-icon name="add"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-title>Home</ion-title>
+        <ion-title color="light">Home</ion-title>
     </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-    <ion-list>
+<ion-content class="color-light">
+    <ion-list >
         <button ion-item
+
                 *ngFor="let challenge of challenges | async"
                 (click)="onLoadCh(challenge, challenge.$key)">
-                <!--[navPush]="challengePage"-->
-                <!--[navParams] ="challenge">-->
             <h2>{{challenge.title}}</h2>
-            <ion-note>{{challenge.difficulty}}</ion-note>
-            <img src="{{challenge.img}}" alt="">
+            <h4 disabled>by {{challenge.userId}}</h4>
+            <h3>{{challenge.difficulty}}</h3>
+            <p>{{challenge.description}}</p>
+            <!--<img src="{{challenge.img}}" alt="">-->
+            <ion-avatar item-left>
+                <img src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg">
+            </ion-avatar>
+            <ion-thumbnail item-right>
+                <img src="{{challenge.img}}">
+            </ion-thumbnail>
         </button>
     </ion-list>
 </ion-content>

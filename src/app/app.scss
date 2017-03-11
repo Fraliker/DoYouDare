@@ -1,19 +1,10 @@
 // http://ionicframework.com/docs/v2/theming/
+.toolbar-background {
+  background-color: #EE964B
+}
 
-.color-primary {
-  background-color: #F95738;
-}
-.color-secondary {
-  background-color: #F4D35E;
-}
-.color-light {
-  background-color: #FAF0CA;
-}
-.color-dark {
-  background-color: #0D3B66;
-}
-.color-danger {
-  background-color: #F95738;
+.ion-header {
+  $toolbar-md-title-text-color: $colors
 }
 // App Global Sass
 // --------------------------------------------------

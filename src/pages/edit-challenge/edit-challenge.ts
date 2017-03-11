@@ -89,7 +89,8 @@ export class EditChallengePage implements OnInit {
 			encodingType: Camera.EncodingType.PNG,
 			targetWidth: 300,
 			targetHeight: 200,
-			saveToPhotoAlbum: true,
+			//saveToPhotoAlbum: true,
+			correctOrientation: false
 		})
 			.then(
 				imageData => {
@@ -119,7 +120,7 @@ export class EditChallengePage implements OnInit {
 			encodingType: Camera.EncodingType.PNG,
 			targetWidth: 300,
 			targetHeight: 200,
-			saveToPhotoAlbum: true,
+			//saveToPhotoAlbum: true,
 		})
 			.then(
 				imageData => {
