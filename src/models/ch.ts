@@ -6,6 +6,8 @@ export class Challenge {
         public difficulty: string,
         public img: string,
         public userId: string,
+        public rating: any[],
+        public comments: any[],
     ) {
 
     }

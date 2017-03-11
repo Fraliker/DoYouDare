@@ -15,6 +15,7 @@ import {ChService} from "../services/challenges";
 import {AuthService} from "../services/auth";
 import {HOPage} from "../pages/home/home-options/home-options";
 import {AngularFireModule} from "angularfire2"
+import {UserService} from "../services/users"
 
 
 export const firebaseConfig = {
@@ -60,7 +61,7 @@ export const firebaseConfig = {
         HOPage
 
     ],
-    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ChService, AuthService]
+    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ChService, AuthService, UserService]
 })
 export class AppModule {
 }
