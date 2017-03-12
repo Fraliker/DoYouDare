@@ -1,11 +1,6 @@
 <ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="Front" ></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="Login" ></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="Signup" ></ion-tab>
-  <ion-tab [root]="tab4Root" tabTitle="Home" ></ion-tab>
-  <ion-tab [root]="tab5Root" tabTitle="Challenge" ></ion-tab>
-  <ion-tab [root]="tab6Root" tabTitle="Edit" ></ion-tab>
-  <ion-tab [root]="tab7Root" tabTitle="User" ></ion-tab>
-  <ion-tab [root]="tab8Root" tabTitle="Profile" ></ion-tab>
-  <ion-tab [root]="tab9Root" tabTitle="About" ></ion-tab>
+  <ion-tab [root]="tab1Root" tabTitle="Profile" ></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Made" [rootParams]="1"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="Taken" [rootParams]="2"></ion-tab>
+  <ion-tab [root]="tab4Root" tabTitle="Complete" [rootParams]="3"></ion-tab>
 </ion-tabs>

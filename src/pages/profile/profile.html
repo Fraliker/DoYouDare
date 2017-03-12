@@ -7,12 +7,34 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>profile</ion-title>
+    <ion-title>{{profile}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content >
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <img src="{{user.img}}" alt="">
+        <h2>{{user.name}}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="subtitle">{{user.tagline}}</div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>{{user.bio}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="sameUser">
+      <ion-col>
+        <button ion-button outline block (click)="onEditProfile()">Edit my profile</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

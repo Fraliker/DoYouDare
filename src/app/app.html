@@ -5,7 +5,7 @@
         </ion-toolbar>
     </ion-header>
     <ion-content>
-        <ion-list>
+        <ion-list padding>
             <button ion-item
                     icon-left
                     (click)="onLoad(rootPage)"
@@ -13,7 +13,24 @@
 
             >
                 <ion-icon name="book"></ion-icon>
-                Tabs
+                Home
+            </button>
+            <button ion-item
+                    icon-left
+                    (click)="onLoad(profilePage)"
+                    *ngIf="isAuthenticated"
+
+            >
+                <ion-icon name="person"></ion-icon>
+                Profile
+            </button>
+            <button ion-item
+                    icon-left
+                    (click)="onLoad(aboutPage)"
+
+            >
+                <ion-icon name="information-circle"></ion-icon>
+                About
             </button>
             <button ion-item
                     icon-left
@@ -21,7 +38,7 @@
                     *ngIf="!isAuthenticated"
             >
                 <ion-icon name="log-in"></ion-icon>
-                LogIn
+                Log In
             </button>
             <button ion-item
                     icon-left
@@ -29,7 +46,7 @@
                     *ngIf="!isAuthenticated"
             >
                 <ion-icon name="person"></ion-icon>
-                SignUp
+                Sign Up
             </button>
             <button ion-item
                     icon-left
@@ -37,7 +54,7 @@
                     *ngIf="isAuthenticated"
             >
                 <ion-icon name="log-out"></ion-icon>
-                SignOut
+                Sign Out
             </button>
         </ion-list>
     </ion-content>

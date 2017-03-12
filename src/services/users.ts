@@ -6,20 +6,18 @@ import {User} from "../models/user"
 
 @Injectable()
 export class UserService {
-	// private challenges: Challenge[] = [];
-	challenges: FirebaseListObservable<User[]>
+	users: FirebaseListObservable<User[]>
 	
 	constructor(private af: AngularFire) {
-		this.challenges = af.database.list('/users');
+		this.users = af.database.list('/users');
 		
 	}
 	
-	addUser(name: string, tagline: string, bio: string, img: string, chMade: any[], chTaken: any[], chDone: any[], chLiked: any[]) {
-		return this.challenges.push({name, tagline, bio, img, chMade, chTaken, chDone, chLiked})
-		
+	addUser(uid: string, name: string) {
+		return this.users.push({uid, name})
 	}
 	
-	editUser($key: string, name: string, tagline: string, bio: string, img: string, chMade: any[], chTaken: any[], chDone: any[], chLiked: any[]) {
-		this.challenges.update($key, {name, tagline, bio, img, chMade, chTaken, chDone, chLiked})
+	editUser($key: string, uid: string, name: string, tagline: string, bio: string, img: string, chMade: any[], chTaken: any[], chDone: any[], chLiked: any[]) {
+		this.users.update($key, {uid, name, tagline, bio, img, chMade, chTaken, chDone, chLiked})
 	}
 }

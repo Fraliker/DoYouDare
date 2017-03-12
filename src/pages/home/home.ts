@@ -5,7 +5,6 @@ import {Challenge} from "../../models/ch";
 import {EditChallengePage} from "../edit-challenge/edit-challenge";
 import {ChService} from "../../services/challenges";
 import {ChallengePage} from "../challenge/challenge";
-import {HOPage} from "./home-options/home-options";
 import {AuthService} from "../../services/auth";
 import {FirebaseListObservable, AngularFire} from "angularfire2"
 

@@ -24,4 +24,9 @@ export class ChService {
 	removeCh(key: string) {
 		this.challenges.remove(key)
 	}
+	//
+	// addComment($key: string, comments:) {
+	// 	this.challenges.update($key, {title, description, difficulty, img, userId})
+	// }
+	
 }

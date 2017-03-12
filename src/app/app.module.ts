@@ -9,13 +9,12 @@ import {SignupPage} from "../pages/signup/signup";
 import {ProfilePage} from "../pages/profile/profile";
 import {LoginPage} from "../pages/login/login";
 import {ChallengePage} from "../pages/challenge/challenge";
-import {UserPage} from "../pages/user/user";
 import {EditChallengePage} from "../pages/edit-challenge/edit-challenge";
 import {ChService} from "../services/challenges";
 import {AuthService} from "../services/auth";
-import {HOPage} from "../pages/home/home-options/home-options";
 import {AngularFireModule} from "angularfire2"
 import {UserService} from "../services/users"
+import {ListPage} from "../pages/list/list"
 
 
 export const firebaseConfig = {
@@ -37,9 +36,8 @@ export const firebaseConfig = {
         LoginPage,
         ProfilePage,
         SignupPage,
-        UserPage,
         EditChallengePage,
-        HOPage
+        ListPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -56,10 +54,8 @@ export const firebaseConfig = {
         LoginPage,
         ProfilePage,
         SignupPage,
-        UserPage,
         EditChallengePage,
-        HOPage
-
+        ListPage
     ],
     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ChService, AuthService, UserService]
 })

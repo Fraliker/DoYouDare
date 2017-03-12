@@ -20,7 +20,7 @@ export class FrontPage {
     }
 
     ionViewDidEnter() {
-        this.navCtrl.push(HomePage);
+        this.navCtrl.popToRoot()
         //     this.chService.fetchList()
         //         .subscribe(
         //             (list: Challenge[]) => {

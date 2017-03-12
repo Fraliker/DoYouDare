@@ -1,37 +1,40 @@
-import {Component, ViewChild} from '@angular/core';
-import {Platform, NavController, MenuController} from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import {Component, ViewChild} from '@angular/core'
+import {Platform, NavController, MenuController} from 'ionic-angular'
+import { StatusBar, Splashscreen } from 'ionic-native'
 
-import {FrontPage} from "../pages/front/front";
-import {TabsPage} from "../pages/tabs/tabs";
-import {LoginPage} from "../pages/login/login";
-import {SignupPage} from "../pages/signup/signup";
-import {AuthService} from "../services/auth";
-import {HomePage} from "../pages/home/home";
+import {LoginPage} from "../pages/login/login"
+import {SignupPage} from "../pages/signup/signup"
+import {AuthService} from "../services/auth"
+import {HomePage} from "../pages/home/home"
 
-import firebase from 'firebase/app';
+import firebase from 'firebase/app'
+import {ProfilePage} from "../pages/profile/profile"
+import {AboutPage} from "../pages/about/about"
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-//  rootPage = FrontPage;
-  rootPage: any = FrontPage;
-  loginPage = LoginPage;
-  signupPage = SignupPage;
-  isAuthenticated = false;
-  @ViewChild('nav') nav: NavController;
+  rootPage: any = HomePage
+  loginPage = LoginPage
+  signupPage = SignupPage
+  profilePage = ProfilePage
+  aboutPage = AboutPage
+  isAuthenticated = false
+  @ViewChild('nav') nav: NavController
 
   constructor(platform: Platform, private menuCtrl: MenuController,
   private authService: AuthService) {
     
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.isAuthenticated = true;
-        this.rootPage = HomePage;
+        this.isAuthenticated = true
+        this.rootPage = HomePage
+        console.log("home as root")
       } else {
         this.isAuthenticated = false;
-        this.rootPage = LoginPage;
+        this.rootPage = this.signupPage
+        
       }
     })
     platform.ready().then(() => {
