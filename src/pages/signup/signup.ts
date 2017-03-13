@@ -26,6 +26,7 @@ export class SignupPage {
 		});
 		this.authService.signup(form.value.email, form.value.password)
 			.then(data => {
+				console.log("new user uid"+data.uid)
 				this.userService.addUser(data.uid, form.value.name)
 				loading.dismiss();
 				this.navCtrl.popToRoot()

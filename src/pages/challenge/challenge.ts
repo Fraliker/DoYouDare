@@ -12,7 +12,6 @@ import {AuthService} from "../../services/auth"
 })
 export class ChallengePage implements OnInit {
     challenge: Challenge
-    index: number
     sameUser: boolean
 
     constructor(public navCtrl: NavController,
@@ -23,10 +22,7 @@ export class ChallengePage implements OnInit {
 
 
     ngOnInit() {
-        console.log(this.challenge)
         this.challenge = this.navParams.get('challenge')
-        console.log(this.challenge)
-        //this.index = this.navParams.get('index')
         this.sameUser = this.authService.compareUsers(this.challenge.userId)
         console.log(this.sameUser)
     }

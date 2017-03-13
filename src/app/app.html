@@ -17,16 +17,15 @@
             </button>
             <button ion-item
                     icon-left
-                    (click)="onLoad(profilePage)"
                     *ngIf="isAuthenticated"
-
+                    (click)="onChangePage(profilePage)"
             >
                 <ion-icon name="person"></ion-icon>
                 Profile
             </button>
             <button ion-item
                     icon-left
-                    (click)="onLoad(aboutPage)"
+                    (click)="onChangePage(aboutPage)"
 
             >
                 <ion-icon name="information-circle"></ion-icon>

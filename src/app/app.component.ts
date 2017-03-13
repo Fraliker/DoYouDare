@@ -8,8 +8,8 @@ import {AuthService} from "../services/auth"
 import {HomePage} from "../pages/home/home"
 
 import firebase from 'firebase/app'
-import {ProfilePage} from "../pages/profile/profile"
 import {AboutPage} from "../pages/about/about"
+import {TabsPage} from "../pages/tabs/tabs"
 
 @Component({
   templateUrl: 'app.html'
@@ -18,13 +18,16 @@ export class MyApp {
   rootPage: any = HomePage
   loginPage = LoginPage
   signupPage = SignupPage
-  profilePage = ProfilePage
+  tabsPage = TabsPage
   aboutPage = AboutPage
   isAuthenticated = false
+  userId: any
+  
   @ViewChild('nav') nav: NavController
 
   constructor(platform: Platform, private menuCtrl: MenuController,
   private authService: AuthService) {
+    
     
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -45,6 +48,7 @@ export class MyApp {
     });
   }
 
+
   onLoad(page: any) {
     this.nav.setRoot(page);
     this.menuCtrl.close();
@@ -54,5 +58,11 @@ export class MyApp {
     this.authService.logout();
     this.menuCtrl.close();
     this.nav.setRoot(SignupPage);
+  }
+  
+  onChangePage(page: any) {
+    this.userId = this.authService.getActiveUser().uid
+    console.log("start auth changepage:"+this.authService.getActiveUser().uid)
+    this.nav.push(page, this.userId)
   }
 }

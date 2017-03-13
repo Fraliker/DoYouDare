@@ -22,12 +22,10 @@ export class HomePage {
                 private authService: AuthService,
                 private loadingCtrl: LoadingController,
                 private af: AngularFire) {
-        
     }
 
     ionViewWillEnter() {
         this.challenges = this.af.database.list('/challenges')
-
     }
 
     onNewCh() {

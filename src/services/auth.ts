@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-import {FirebaseAuthState, AngularFireAuth, AuthMethods, AuthProviders} from "angularfire2"
+import {FirebaseAuthState, AngularFireAuth, AuthMethods, AuthProviders, AngularFire} from "angularfire2"
 import {Injectable} from "@angular/core"
 import { Platform } from 'ionic-angular'
 import { Facebook } from 'ionic-native'
@@ -7,15 +7,20 @@ import { Facebook } from 'ionic-native'
 @Injectable()
 export class AuthService {
     private authState: FirebaseAuthState;
+    private authUser: any
     
-    constructor(public auth$: AngularFireAuth, private platform: Platform) {
+    constructor(public auth$: AngularFireAuth, private platform: Platform, public af: AngularFire) {
         this.authState = auth$.getAuth();
         auth$.subscribe((state: FirebaseAuthState) => {
             this.authState = state;
         });
+        this.af.auth.subscribe(auth => this.authUser=auth.uid);// user info is inside auth object
     }
     getAuthenticated() {
-        return this.authState !== null;
+        return this.authState !== null
+    }
+    getFBUser() {
+        return this.authUser
     }
     
     signInWithFacebook(): firebase.Promise<FirebaseAuthState> {
