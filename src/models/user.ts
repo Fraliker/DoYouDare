@@ -1,7 +1,6 @@
 export class User {
 	constructor(
 		public $key : string,
-		public uid: string,
 		public name: string,
 		public tagline: string,
 		public bio: string,

@@ -7,6 +7,7 @@ import {ChService} from "../../services/challenges";
 import {ChallengePage} from "../challenge/challenge";
 import {AuthService} from "../../services/auth";
 import {FirebaseListObservable, AngularFire} from "angularfire2"
+import {TabsPage} from "../tabs/tabs"
 
 @Component({
     selector: 'page-home',
@@ -33,7 +34,12 @@ export class HomePage {
     }
 
     onLoadCh(challenge: Challenge, index: number) {
-        this.navCtrl.push(ChallengePage, {challenge: challenge});
+        console.log(index)
+        this.navCtrl.push(ChallengePage, {challenge: challenge, index: index});
+    }
+    
+    onLoadUser(userId: string) {
+        this.navCtrl.push(TabsPage, {userId: userId});
     }
 
     // onShowOptions(event: MouseEvent) {

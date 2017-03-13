@@ -33,7 +33,7 @@ export class EditChallengePage implements OnInit {
 	ngOnInit() {
 		this.mode = this.navParams.get('mode'); //assign value from previous page
 		this.userId = this.authService.getActiveUser().uid
-		this.imgRef = firebase.storage().ref()
+		this.imgRef = firebase.storage().ref().child('/chImg/')
 		this.img = ''
 		if (this.mode == 'Edit') {
 			this.challenge = this.navParams.get('challenge')

@@ -1,14 +1,14 @@
-<ion-header >
-    <ion-navbar >
+<ion-header>
+    <ion-navbar>
         <ion-buttons left>
             <button ion-button icon-only menuToggle color="light">
                 <ion-icon name="menu"></ion-icon>
             </button>
         </ion-buttons>
         <!--<ion-buttons end>-->
-            <!--<button ion-button icon-only (click)="onShowOptions($event)">-->
-                <!--<ion-icon name="more"></ion-icon>-->
-            <!--</button>-->
+        <!--<button ion-button icon-only (click)="onShowOptions($event)">-->
+        <!--<ion-icon name="more"></ion-icon>-->
+        <!--</button>-->
         <!--</ion-buttons>-->
         <ion-buttons end>
             <button ion-button icon-only color="light" (click)="onNewCh()">
@@ -20,20 +20,21 @@
 </ion-header>
 
 <ion-content class="color-light">
-    <ion-list >
+    <ion-list>
         <button ion-item
 
                 *ngFor="let challenge of challenges | async"
-                (click)="onLoadCh(challenge, challenge.$key)">
+        >
             <h2>{{challenge.title}}</h2>
             <h4 disabled>by {{challenge.userId}}</h4>
             <h3>{{challenge.difficulty}}</h3>
             <p>{{challenge.description}}</p>
-            <!--<img src="{{challenge.img}}" alt="">-->
-            <ion-avatar item-left>
+            <ion-avatar item-left
+                        (click)="onLoadUser(challenge.userId)">
                 <img src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg">
             </ion-avatar>
-            <ion-thumbnail item-right>
+            <ion-thumbnail item-right
+                           (click)="onLoadCh(challenge, challenge.$key)">
                 <img src="{{challenge.img}}">
             </ion-thumbnail>
         </button>
