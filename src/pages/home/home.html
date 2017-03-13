@@ -22,16 +22,18 @@
 <ion-content class="color-light">
     <ion-list>
         <button ion-item
-
                 *ngFor="let challenge of challenges | async"
         >
-            <h2>{{challenge.title}}</h2>
-            <h4 disabled>by {{challenge.userId}}</h4>
-            <h3>{{challenge.difficulty}}</h3>
-            <p>{{challenge.description}}</p>
+            <div>
+                <h2>{{challenge.title}}</h2>
+                <h4 disabled>by {{challenge.userId}}</h4>
+                <h3>{{challenge.difficulty}}</h3>
+                <p>{{challenge.description}}</p>
+            </div>
+
             <ion-avatar item-left
                         (click)="onLoadUser(challenge.userId)">
-                <img src="https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg">
+                <img src={{getAvatar()}}>
             </ion-avatar>
             <ion-thumbnail item-right
                            (click)="onLoadCh(challenge, challenge.$key)">

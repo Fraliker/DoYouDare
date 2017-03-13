@@ -64,5 +64,6 @@ export class MyApp {
     this.userId = this.authService.getActiveUser().uid
     console.log("start auth changepage:"+this.authService.getActiveUser().uid)
     this.nav.push(page, {userId: this.userId})
+    this.menuCtrl.close();
   }
 }

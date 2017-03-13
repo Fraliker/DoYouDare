@@ -41,6 +41,10 @@ export class HomePage {
     onLoadUser(userId: string) {
         this.navCtrl.push(TabsPage, {userId: userId});
     }
+    
+    getAvatar() {
+        
+    }
 
     // onShowOptions(event: MouseEvent) {
     //     const loading = this.loadingCtrl.create({

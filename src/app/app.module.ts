@@ -15,6 +15,7 @@ import {AuthService} from "../services/auth";
 import {AngularFireModule} from "angularfire2"
 import {UserService} from "../services/users"
 import {ListPage} from "../pages/list/list"
+import {ProfileEditPage} from "../pages/profile-edit/profile-edit"
 
 
 export const firebaseConfig = {
@@ -37,7 +38,8 @@ export const firebaseConfig = {
         ProfilePage,
         SignupPage,
         EditChallengePage,
-        ListPage
+        ListPage,
+        ProfileEditPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -55,7 +57,8 @@ export const firebaseConfig = {
         ProfilePage,
         SignupPage,
         EditChallengePage,
-        ListPage
+        ListPage,
+        ProfileEditPage
     ],
     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ChService, AuthService, UserService]
 })
