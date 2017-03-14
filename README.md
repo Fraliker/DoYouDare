@@ -18,6 +18,6 @@ DoYouDare is a social application that used for sharing challenges for other use
 - Backend: Firebase
 - Extra libraries: AngularFire2
 
-# Preview
+# Video Preview
 
 [![Alt text](https://img.youtube.com/vi/bgzfcyJweNI/0.jpg)](https://www.youtube.com/watch?v=bgzfcyJweNI)
