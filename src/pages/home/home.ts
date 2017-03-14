@@ -8,14 +8,19 @@ import {ChallengePage} from "../challenge/challenge";
 import {AuthService} from "../../services/auth";
 import {FirebaseListObservable, AngularFire} from "angularfire2"
 import {TabsPage} from "../tabs/tabs"
+import {Subject} from "rxjs/Subject"
+import 'rxjs/Rx'
 
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
 })
 export class HomePage {
-    challenges: FirebaseListObservable<Challenge[]>
-
+    private challenges: FirebaseListObservable<Challenge[]>
+    private user: any
+    private data: any
+    private sort: boolean = false
+    private currentUser: string
 
     constructor(public navCtrl: NavController,
                 public chService: ChService,
@@ -23,10 +28,11 @@ export class HomePage {
                 private authService: AuthService,
                 private loadingCtrl: LoadingController,
                 private af: AngularFire) {
+        // this.currentUser = this.authService.getActiveUser().uid
     }
 
     ionViewWillEnter() {
-        this.challenges = this.af.database.list('/challenges')
+        this.challenges = this.af.database.list('/challenges').map((array) => array.reverse()) as FirebaseListObservable<Challenge[]>
     }
 
     onNewCh() {
@@ -41,9 +47,53 @@ export class HomePage {
     onLoadUser(userId: string) {
         this.navCtrl.push(TabsPage, {userId: userId});
     }
+    onSort() {
+        if (this.sort === false) {
+            this.challenges = this.af.database.list('/challenges', {
+                query: {
+                    orderByChild: 'title',
+                }
+            })
+            this.sort = true
+        } else {
+            this.challenges = this.af.database.list('/challenges', {
+                query: {
+                    orderByKey: true,
+                }
+            }).map((array) => array.reverse()) as FirebaseListObservable<Challenge[]>
+            this.sort = false
+        }
+    }
     
-    getAvatar() {
+//     onLike($key: string, userId: string) {
+//         console.log($key+''+userId)
+//     this.chService.likeCh($key, userId)
+// }
+    
+    // getItems(ev: any) {
+    //     let val = ev.target.value;
+    //     this.challenges = this.af.database.list('/challenges', {
+    //         query: {
+    //             orderByChild: 'title',
+    //             equalTo: val,
+    //         }
+    //     })
+    // }
+    
+    getAvatar(userId) {
+        this.user = this.af.database.object('/users/' + userId)
+        console.log(this.user)
+        // this.user = this.af.database.object('/users/').$ref.child(userId)
+        // this.user.subscribe(user => {
+        //     this.data = user
+        //     console.log(this.data.img)
+        //     // return this.data.img
+        //     return true
+        //
+        // })
+        // console.log(this.data.img)
         
+        // return "http://qnimate.com/wp-content/uploads/2014/03/images2.jpg"
     }
 
     // onShowOptions(event: MouseEvent) {

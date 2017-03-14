@@ -1,18 +1,54 @@
-<!--
-  Generated template for the List page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>List</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle color="light">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title color="light">Challenges</ion-title>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content >
+  <ion-list>
+    <ion-item-sliding
+            *ngFor="let challenge of challenges | async">
+      <button ion-item
 
-<ion-content padding>
+      >
+        <div>
+          <h2>{{challenge.title}}</h2>
+          <!--<h4 disabled>by {{challenge.userId}}</h4>-->
+          <h3>{{challenge.difficulty}}</h3>
+          <p>{{challenge.description}}</p>
+        </div>
 
+        <!--<ion-avatar item-left-->
+        <!--(click)="onLoadUser(challenge.userId)">-->
+        <!--<img src="{{(user | async)?.img}}">-->
+        <!--</ion-avatar>-->
+        <ion-thumbnail item-right
+                       (click)="onLoadCh(challenge, challenge.$key)">
+          <img src="{{challenge.img}}">
+        </ion-thumbnail>
+      </button>
+      <ion-item-options side="right">
+        <button ion-button
+                (click)="onLoadUser(challenge.userId)"
+        >
+          <ion-icon name="person"></ion-icon>
+          User
+        </button>
+        <button ion-button>
+
+          <ion-icon name="thumbs-up" isActive="false"></ion-icon>
+          Like
+        </button>
+        <button ion-button >
+          <ion-icon name="checkmark-circle" isActive="false"></ion-icon>
+          Take
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
