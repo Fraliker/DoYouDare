@@ -20,4 +20,4 @@ DoYouDare is a social application that used for sharing challenges for other use
 
 # Preview
 
-[![Alt text](https://img.youtube.com/vi/VID/0.jpg)](https://www.youtube.com/watch?v=bgzfcyJweNI)
+[![Alt text](https://img.youtube.com/vi/bgzfcyJweNI/0.jpg)](https://www.youtube.com/watch?v=bgzfcyJweNI)
