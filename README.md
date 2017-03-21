@@ -20,4 +20,6 @@ DoYouDare is a social application that used for sharing challenges for other use
 
 # Video Preview
 
+[Download here](/resources/DoDs.apk)
+
 [![Alt text](https://img.youtube.com/vi/bgzfcyJweNI/0.jpg)](https://www.youtube.com/watch?v=bgzfcyJweNI)
