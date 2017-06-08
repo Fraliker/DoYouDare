@@ -1,5 +1,5 @@
 # DoYouDare
-Challenges sharing cross-platform app built with Angular2, Ionic2 and Firebase
+Cross-platform app for sharing challenges with your friends built with Angular, Ionic and Firebase
 
 # About
 DoYouDare is a social application that used for sharing challenges for other users and friends to accept and complete. It’s a web based cross-platform application designed for mobile use on both Android and iOS devices. Create, like and take challenges and compete with your friends!
